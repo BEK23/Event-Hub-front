@@ -1,7 +1,7 @@
 "use client";
 
 import { IEvent } from "@/types/event";
-import { Chip, Image } from "@heroui/react";
+import { Chip, Image, Link } from "@heroui/react";
 import { FC } from "react";
 
 export const EventCard: FC<IEvent> = (props) => {
@@ -11,6 +11,7 @@ export const EventCard: FC<IEvent> = (props) => {
     short_description,
     category,
     community,
+    source_link,
     // date,
   } = props;
 
@@ -29,7 +30,6 @@ export const EventCard: FC<IEvent> = (props) => {
         <Image
           src={`http://localhost:1337${image.url}`}
           alt={title}
-          isBlurred
           classNames={{
             wrapper:
               "h-[300px] w-full mx-auto absolute top-0 overflow-hidden blur-md",
@@ -46,12 +46,34 @@ export const EventCard: FC<IEvent> = (props) => {
         </Chip>
       </div>
 
-      <div className="px-4 mb-4">
+      <div className="px-4 mb-4 grow">
         <h1 className="text-2xl font-semibold mt-6">{title}</h1>
         <h2 className="mb-2 text-gray-600">{community?.name}</h2>
 
         <p>{short_description}</p>
       </div>
+
+      <Link
+        href={source_link}
+        className="py-3 relative cursor-pointer text-white"
+      >
+        <div className="px-4">
+          <div className="text-xl">Tap to know more</div>
+          <div className="">Read more</div>
+        </div>
+
+        <div className="bg-black/20 backdrop-blur-md inset-0 absolute -z-10" />
+
+        <Image
+          src={`http://localhost:1337${image.url}`}
+          alt={title}
+          classNames={{
+            wrapper:
+              "size-full mx-auto absolute top-0 overflow-hidden rounded-none -z-20",
+            img: "rounded-none object-cover",
+          }}
+        />
+      </Link>
     </div>
   );
 };
