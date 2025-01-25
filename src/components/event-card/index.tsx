@@ -15,10 +15,10 @@ export const EventCard: FC<EventCardProps> = (props) => {
   const {
     image,
     title,
-    short_description,
+    // short_description,
     description,
     category,
-    date,
+    // date,
     owner,
   } = props;
 

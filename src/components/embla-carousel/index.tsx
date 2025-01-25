@@ -1,17 +1,7 @@
 "use client";
 
-import React, {
-  ReactNode,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import {
-  EmblaCarouselType,
-  EmblaOptionsType,
-  EngineType,
-} from "embla-carousel";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
+import { EmblaOptionsType, EngineType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 
 import "./styles.css";
@@ -34,14 +24,14 @@ type PropType = {
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { options, slides: propSlides } = props;
-  const scrollListenerRef = useRef<() => void>(() => undefined);
+  // const scrollListenerRef = useRef<() => void>(() => undefined);
   const listenForScrollRef = useRef(true);
   const hasMoreToLoadRef = useRef(true);
-  const [slides, setSlides] = useState(propSlides);
-  const [hasMoreToLoad, setHasMoreToLoad] = useState(true);
+  const [slides] = useState(propSlides);
+  const [hasMoreToLoad] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({
+  const [emblaRef] = useEmblaCarousel({
     ...options,
     watchSlides: (emblaApi) => {
       const reloadEmbla = (): void => {
@@ -93,52 +83,52 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   //   onNextButtonClick
   // } = usePrevNextButtons(emblaApi)
 
-  const onScroll = useCallback((emblaApi: EmblaCarouselType) => {
-    if (!listenForScrollRef.current) return;
+  // const onScroll = useCallback((emblaApi: EmblaCarouselType) => {
+  //   if (!listenForScrollRef.current) return;
 
-    // setLoadingMore((loadingMore) => {
-    //   const lastSlide = emblaApi.slideNodes().length - 1;
-    //   const lastSlideInView = emblaApi.slidesInView().includes(lastSlide);
-    //   const loadMore = !loadingMore && lastSlideInView;
+  //   // setLoadingMore((loadingMore) => {
+  //   //   const lastSlide = emblaApi.slideNodes().length - 1;
+  //   //   const lastSlideInView = emblaApi.slidesInView().includes(lastSlide);
+  //   //   const loadMore = !loadingMore && lastSlideInView;
 
-    //   // if (loadMore) {
-    //   //   listenForScrollRef.current = false;
+  //   //   // if (loadMore) {
+  //   //   //   listenForScrollRef.current = false;
 
-    //   //   mockApiCall(1000, 2000, () => {
-    //   //     setSlides((currentSlides) => {
-    //   //       if (currentSlides.length === 20) {
-    //   //         setHasMoreToLoad(false);
-    //   //         emblaApi.off("scroll", scrollListenerRef.current);
-    //   //         return currentSlides;
-    //   //       }
-    //   //       const newSlideCount = currentSlides.length + 5;
-    //   //       return Array.from(Array(newSlideCount).keys());
-    //   //     });
-    //   //   });
-    //   // }
+  //   //   //   mockApiCall(1000, 2000, () => {
+  //   //   //     setSlides((currentSlides) => {
+  //   //   //       if (currentSlides.length === 20) {
+  //   //   //         setHasMoreToLoad(false);
+  //   //   //         emblaApi.off("scroll", scrollListenerRef.current);
+  //   //   //         return currentSlides;
+  //   //   //       }
+  //   //   //       const newSlideCount = currentSlides.length + 5;
+  //   //   //       return Array.from(Array(newSlideCount).keys());
+  //   //   //     });
+  //   //   //   });
+  //   //   // }
 
-    //   return loadingMore || lastSlideInView;
-    // });
-  }, []);
+  //   //   return loadingMore || lastSlideInView;
+  //   // });
+  // }, []);
 
-  const addScrollListener = useCallback(
-    (emblaApi: EmblaCarouselType) => {
-      scrollListenerRef.current = () => onScroll(emblaApi);
-      emblaApi.on("scroll", scrollListenerRef.current);
-    },
-    [onScroll]
-  );
+  // const addScrollListener = useCallback(
+  //   (emblaApi: EmblaCarouselType) => {
+  //     scrollListenerRef.current = () => onScroll(emblaApi);
+  //     emblaApi.on("scroll", scrollListenerRef.current);
+  //   },
+  //   [onScroll]
+  // );
 
-  useEffect(() => {
-    if (!emblaApi) return;
-    addScrollListener(emblaApi);
+  // useEffect(() => {
+  //   if (!emblaApi) return;
+  //   addScrollListener(emblaApi);
 
-    const onResize = () => emblaApi.reInit();
-    window.addEventListener("resize", onResize);
-    emblaApi.on("destroy", () =>
-      window.removeEventListener("resize", onResize)
-    );
-  }, [emblaApi, addScrollListener]);
+  //   const onResize = () => emblaApi.reInit();
+  //   window.addEventListener("resize", onResize);
+  //   emblaApi.on("destroy", () =>
+  //     window.removeEventListener("resize", onResize)
+  //   );
+  // }, [emblaApi, addScrollListener]);
 
   useEffect(() => {
     hasMoreToLoadRef.current = hasMoreToLoad;
