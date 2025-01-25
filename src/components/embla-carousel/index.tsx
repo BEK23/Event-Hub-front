@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   EmblaCarouselType,
   EmblaOptionsType,
@@ -10,19 +16,19 @@ import useEmblaCarousel from "embla-carousel-react";
 
 import "./styles.css";
 
-const mockApiCall = (
-  minWait: number,
-  maxWait: number,
-  callback: () => void
-): void => {
-  const min = Math.ceil(minWait);
-  const max = Math.floor(maxWait);
-  const wait = Math.floor(Math.random() * (max - min + 1)) + min;
-  setTimeout(callback, wait);
-};
+// const mockApiCall = (
+//   minWait: number,
+//   maxWait: number,
+//   callback: () => void
+// ): void => {
+//   const min = Math.ceil(minWait);
+//   const max = Math.floor(maxWait);
+//   const wait = Math.floor(Math.random() * (max - min + 1)) + min;
+//   setTimeout(callback, wait);
+// };
 
 type PropType = {
-  slides: number[];
+  slides: ReactNode[];
   options?: EmblaOptionsType;
 };
 
@@ -90,29 +96,29 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const onScroll = useCallback((emblaApi: EmblaCarouselType) => {
     if (!listenForScrollRef.current) return;
 
-    setLoadingMore((loadingMore) => {
-      const lastSlide = emblaApi.slideNodes().length - 1;
-      const lastSlideInView = emblaApi.slidesInView().includes(lastSlide);
-      const loadMore = !loadingMore && lastSlideInView;
+    // setLoadingMore((loadingMore) => {
+    //   const lastSlide = emblaApi.slideNodes().length - 1;
+    //   const lastSlideInView = emblaApi.slidesInView().includes(lastSlide);
+    //   const loadMore = !loadingMore && lastSlideInView;
 
-      if (loadMore) {
-        listenForScrollRef.current = false;
+    //   // if (loadMore) {
+    //   //   listenForScrollRef.current = false;
 
-        mockApiCall(1000, 2000, () => {
-          setSlides((currentSlides) => {
-            if (currentSlides.length === 20) {
-              setHasMoreToLoad(false);
-              emblaApi.off("scroll", scrollListenerRef.current);
-              return currentSlides;
-            }
-            const newSlideCount = currentSlides.length + 5;
-            return Array.from(Array(newSlideCount).keys());
-          });
-        });
-      }
+    //   //   mockApiCall(1000, 2000, () => {
+    //   //     setSlides((currentSlides) => {
+    //   //       if (currentSlides.length === 20) {
+    //   //         setHasMoreToLoad(false);
+    //   //         emblaApi.off("scroll", scrollListenerRef.current);
+    //   //         return currentSlides;
+    //   //       }
+    //   //       const newSlideCount = currentSlides.length + 5;
+    //   //       return Array.from(Array(newSlideCount).keys());
+    //   //     });
+    //   //   });
+    //   // }
 
-      return loadingMore || lastSlideInView;
-    });
+    //   return loadingMore || lastSlideInView;
+    // });
   }, []);
 
   const addScrollListener = useCallback(
@@ -142,11 +148,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     <div className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {slides.map((index) => (
+          {slides.map((slide, index) => (
             <div className="embla__slide" key={index}>
-              <div className="embla__slide__number">
-                <span>{index + 1}</span>
-              </div>
+              {slide}
             </div>
           ))}
           {hasMoreToLoad && (
