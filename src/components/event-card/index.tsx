@@ -1,17 +1,8 @@
+import { IEvent } from "@/types/event";
 import { Chip, Image } from "@heroui/react";
 import { FC } from "react";
 
-type EventCardProps = {
-  image: string;
-  title: string;
-  short_description: string;
-  description: string;
-  category: string;
-  date: string;
-  owner: string;
-};
-
-export const EventCard: FC<EventCardProps> = (props) => {
+export const EventCard: FC<IEvent> = (props) => {
   const {
     image,
     title,
@@ -19,14 +10,13 @@ export const EventCard: FC<EventCardProps> = (props) => {
     description,
     category,
     // date,
-    owner,
   } = props;
 
   return (
     <div className="flex flex-col h-full select-none embla__slide__content">
       <div className="relative">
         <Image
-          src={image}
+          src={image.url}
           alt={title}
           classNames={{
             wrapper: "aspect-video",
@@ -47,7 +37,7 @@ export const EventCard: FC<EventCardProps> = (props) => {
         <h1 className="text-2xl font-semibold my-6">{title}</h1>
 
         <p>{description}</p>
-        <h2 className="mt-2 text-gray-600">{owner}</h2>
+        <h2 className="mt-2 text-gray-600">{}</h2>
       </div>
     </div>
   );
