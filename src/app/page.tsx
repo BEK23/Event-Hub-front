@@ -1,25 +1,16 @@
-"use client";
-
 import { getEvents } from "@/api/events";
 import EmblaCarousel from "@/components/embla-carousel";
 import { EventCard } from "@/components/event-card";
-import { IEvent } from "@/types/event";
 import { EmblaOptionsType } from "embla-carousel";
 import { HouseIcon, SearchIcon, UserRoundIcon } from "lucide-react";
-import { useEffect, useState } from "react";
 
 const OPTIONS: EmblaOptionsType = {
   axis: "y",
 };
 
-export default function Home() {
-  const [events, setEvents] = useState<IEvent[]>([]);
-
-  useEffect(() => {
-    getEvents().then((res) => {
-      setEvents(res.data.data);
-    });
-  }, []);
+export default async function Home() {
+  const { data } = await getEvents();
+  const events = data.data;
 
   return (
     <div className="flex flex-col h-dvh">

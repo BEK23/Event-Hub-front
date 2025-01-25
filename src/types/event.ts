@@ -11,5 +11,7 @@ export interface IEvent {
   details?: Record<string, unknown>;
   category: string;
   source_link: string;
-  community?: string;
+  community?: {
+    name: string;
+  };
 }
