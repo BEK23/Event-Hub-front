@@ -1,4 +1,5 @@
 export interface IEvent {
+  id: number;
   title: string;
   image: {
     name: string;
@@ -14,4 +15,5 @@ export interface IEvent {
   community?: {
     name: string;
   };
+  marked?: boolean;
 }
