@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@heroui/react";
+import { cn, Image } from "@heroui/react";
 import { HouseIcon, SearchIcon, UserRoundIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -21,6 +21,12 @@ export const Footer = () => {
       <HouseIcon
         className={cn("size-7 transition-all", getIconClassName("/"))}
         onClick={() => router.push("/")}
+      />
+      <Image
+        src="/logo.png"
+        alt="Open Data Challange"
+        classNames={{ wrapper: "size-7" }}
+        onClick={() => router.push("/hackathon")}
       />
       <UserRoundIcon
         className={cn("size-7 transition-all", getIconClassName("/profile"))}
