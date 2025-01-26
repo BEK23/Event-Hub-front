@@ -1,5 +1,6 @@
 "use client";
 
+import { BASE_URL } from "@/api/interceptor";
 import { IEvent } from "@/types/event";
 import { Chip, cn, Image, Link } from "@heroui/react";
 import { BookmarkIcon, Share2Icon } from "lucide-react";
@@ -26,7 +27,7 @@ export const EventCard: FC<IEvent> = (props) => {
     <div className="flex flex-col h-full select-none embla__slide__content overflow-auto">
       <div className="relative">
         <Image
-          src={`http://localhost:1337${image.url}`}
+          src={`${BASE_URL}${image.url}`}
           alt={title}
           isBlurred
           classNames={{
@@ -35,7 +36,7 @@ export const EventCard: FC<IEvent> = (props) => {
           }}
         />
         <Image
-          src={`http://localhost:1337${image.url}`}
+          src={`${BASE_URL}${image.url}`}
           alt={title}
           classNames={{
             wrapper:
@@ -97,7 +98,7 @@ export const EventCard: FC<IEvent> = (props) => {
           <div className="bg-black/20 backdrop-blur-md inset-0 absolute -z-10" />
 
           <Image
-            src={`http://localhost:1337${image.url}`}
+            src={`${BASE_URL}${image.url}`}
             alt={title}
             classNames={{
               wrapper:
