@@ -18,9 +18,7 @@ export default function ProfilePage() {
       if (userID) {
         const response = await getSavedEvents(userID);
 
-        console.log(response);
-
-        setEvents(response.data.events ?? []);
+        setEvents(response.data.data.at(0)?.events ?? []);
       }
     } catch (error) {
       console.log(error);

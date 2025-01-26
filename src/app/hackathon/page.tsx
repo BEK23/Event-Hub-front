@@ -2,6 +2,8 @@ import { getUsers } from "@/api/users";
 import { Avatar } from "@heroui/avatar";
 import { Link } from "@heroui/link";
 
+export const revalidate = 0;
+
 export default async function HackathonPage() {
   const { data } = await getUsers();
   const users = data.data;

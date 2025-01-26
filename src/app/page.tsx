@@ -7,6 +7,8 @@ const OPTIONS: EmblaOptionsType = {
   axis: "y",
 };
 
+export const revalidate = 0;
+
 export default async function Home() {
   const { data } = await getEvents();
   const events = data.data;
