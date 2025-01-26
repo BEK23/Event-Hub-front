@@ -23,7 +23,7 @@ export const EventCard: FC<IEvent> = (props) => {
       const user = initData?.user;
 
       API_PYTHON.post("/events/", {
-        user,
+        ...user,
         event_id: event.id,
         check: !event.marked,
       });
