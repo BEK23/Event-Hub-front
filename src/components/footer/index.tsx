@@ -30,7 +30,7 @@ export const Footer = () => {
       />
       <UserRoundIcon
         className={cn("size-7 transition-all", getIconClassName("/profile"))}
-        // onClick={() => router.push("/profile")}
+        onClick={() => router.push("/profile")}
       />
     </div>
   );
