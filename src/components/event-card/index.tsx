@@ -37,7 +37,11 @@ export const EventCard: FC<IEvent> = (props) => {
     <div className="flex flex-col h-full select-none embla__slide__content overflow-auto">
       <div className="relative">
         <Image
-          src={`${BASE_URL}${event.image.url}`}
+          src={
+            event.image
+              ? `${BASE_URL}${event.image.url}`
+              : "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+          }
           alt={event.title}
           isBlurred
           classNames={{
@@ -46,7 +50,11 @@ export const EventCard: FC<IEvent> = (props) => {
           }}
         />
         <Image
-          src={`${BASE_URL}${event.image.url}`}
+          src={
+            event.image
+              ? `${BASE_URL}${event.image.url}`
+              : "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+          }
           alt={event.title}
           classNames={{
             wrapper:
@@ -108,7 +116,11 @@ export const EventCard: FC<IEvent> = (props) => {
           <div className="bg-black/20 backdrop-blur-md inset-0 absolute -z-10" />
 
           <Image
-            src={`${BASE_URL}${event.image.url}`}
+            src={
+              event.image
+                ? `${BASE_URL}${event.image.url}`
+                : "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+            }
             alt={event.title}
             classNames={{
               wrapper:

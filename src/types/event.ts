@@ -1,7 +1,7 @@
 export interface IEvent {
   id: number;
   title: string;
-  image: {
+  image?: {
     name: string;
     url: string;
   };

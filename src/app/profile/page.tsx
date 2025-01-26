@@ -38,7 +38,11 @@ export default function ProfilePage() {
           <div key={event.id} className="flex gap-4 items-center">
             <Avatar
               size="lg"
-              src={`${BASE_URL}${event.image.url}`}
+              src={
+                event.image
+                  ? `${BASE_URL}${event.image.url}`
+                  : "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+              }
               classNames={{ base: "shrink-0" }}
             />
             <h2 className="text-lg font-semibold">{event.title}</h2>
